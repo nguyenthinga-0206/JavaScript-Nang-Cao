@@ -126,6 +126,29 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//...copy
+var arr1 = [1, 2, 3, 4, 5];
+var state = {
+  name: "Nga",
+  address: "Thanh Hoa",
+  channel: "Eric"
+}; // console.log("get data arr1 >> ", arr1);
+// let arr2 = [0,...arr1, 6] // copy lai arr1 bo vao
+// let arr2 = { ...state, channel: "erict" };
+// console.log("get data arr1 >> ", arr2);
+// Cach 1
+// let name = state.name;
+// let address = state.address;
+// let channel = state.channel;
+// Cach 2
+// let { name1, address, channel } = state; // phai trung ten voi key cua object
+// console.log("check key >> ", name1, address, channel);
+
+var arr = ["Nga", "Eric"];
+var name = arr[0],
+    channel = arr[1];
+console.log("check key >> ", name, channel); // callback
+
 var callback = function callback(error, data) {
   if (error) {
     console.log("Error >> ", error);
@@ -218,13 +241,14 @@ var getNewTodo = /*#__PURE__*/function () {
   return function getNewTodo(_x) {
     return _ref.apply(this, arguments);
   };
-}();
-
-getNewTodo("gfasa").then(function (data) {
-  console.log("check get data >> ", data);
-}).catch(function (error) {
-  console.log("check error >> ", error.message);
-}); // fetch API example
+}(); // getNewTodo("gfasa")
+//   .then((data) => {
+//     console.log("check get data >> ", data);
+//   })
+//   .catch((error) => {
+//     console.log("check error >> ", error.message);
+//   });
+// fetch API example
 // fetch("https://jsonplaceholder.typicode.com/todos/1")
 //   .then((Response) => {
 //     return Response.json();
@@ -329,7 +353,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35299" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35137" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
