@@ -7,15 +7,15 @@ const callback = (error, data) => {
   }
 };
 
-function getTodos(callback) {
+function getTodos(id, callback) {
   var request = new XMLHttpRequest();
 
   request.onreadystatechange = function () {
     if (this.readyState === 4 && this.status === 200) {
       const data = JSON.parse(request.responseText);
-      const dataString = JSON.stringify(data);
+      // const dataString = JSON.stringify(data);
       callback(undefined, data);
-      callback(undefined, dataString);
+      // callback(undefined, dataString);
     }
 
     if (this.readyState === 4 && this.status !== 200) {
@@ -23,9 +23,50 @@ function getTodos(callback) {
     }
   };
 
-  // request.open("GET", "https://jsonplaceholder.typicode.com/todos", true);
-  request.open("GET", "src/data.json", true);
+  request.open("GET", `https://jsonplaceholder.typicode.com/todos/${id}`, true);
+  // request.open("GET", "src/data.json", true);
   request.send();
 }
 
-getTodos(callback);
+// Callbacck Hell example
+// getTodos(1, (error, data) => {
+//   if (error) {
+//     console.log("Error >> ", error);
+//   }
+//   if (data) {
+//     console.log("OK >> ", data);
+//     getTodos(2, (error, data) => {
+//       if (error) {
+//         console.log("Error >> ", error);
+//       }
+//       if (data) {
+//         console.log("OK >> ", data);
+//         getTodos(3, (error, data) => {
+//           if (error) {
+//             console.log("Error >> ", error);
+//           }
+//           if (data) {
+//             console.log("OK >> ", data);
+//           }
+//         });
+//       }
+//     });
+//   }
+// });
+
+// getTodos(1, callback);
+
+// promise example
+const promiseExp = () => {
+  // Cach 1
+  return new Promise((resolve, reject) => {
+    // resolve("get some data");
+    resolve({ name: "Nga", channel: "erict" });
+  });
+
+  // Cach 2
+  // return new Promise(function(resolve, reject) {});
+};
+promiseExp().then((data) => {
+  console.log(data);
+});
