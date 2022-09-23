@@ -36,16 +36,45 @@ function getTodos(id, callback) {
 }
 
 // Async & Await example
+// const getNewTodo = async (id) => {
+//   let response = await fetch(
+//     `https://jsonplaceholder.typicode.com/todos/${id}`
+//   );
+
+//   if (response && response.status !== 200) {
+//     throw new Error("Somethong wrongs with status code " + response.status);
+//     // reject
+//   }
+
+//   let data = await response.json();
+//   return data; //resolve
+// };
+
 const getNewTodo = async (id) => {
-  let response = await fetch(
-    `https://jsonplaceholder.typicode.com/todos/${id}`
-  );
-  let data = await response.json();
-  return data;
+  try {
+    let response = await fetch(
+      `https://jsonplaceholder.typicode.com/todos/${id}`
+    );
+
+    if (response && response.status !== 200) {
+      throw new Error("Somethong wrongs with status code " + response.status);
+      // reject
+    }
+
+    let data = await response.json();
+    return data; //resolve
+  } catch (e) {
+    console.log("check catch >> ", e.message);
+  }
 };
-getNewTodo(2).then((data) => {
-  console.log("get data >> ", data);
-});
+
+getNewTodo("gfasa")
+  .then((data) => {
+    console.log("check get data >> ", data);
+  })
+  .catch((error) => {
+    console.log("check error >> ", error.message);
+  });
 
 // fetch API example
 // fetch("https://jsonplaceholder.typicode.com/todos/1")
