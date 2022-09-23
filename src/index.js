@@ -35,13 +35,26 @@ function getTodos(id, callback) {
   });
 }
 
-fetch("https://jsonplaceholder.typicode.com/todos/1")
-  .then((Response) => {
-    return Response.json();
-  })
-  .then((data) => {
-    console.log("check fetch data >> ", data);
-  });
+// Async & Await example
+const getNewTodo = async (id) => {
+  let response = await fetch(
+    `https://jsonplaceholder.typicode.com/todos/${id}`
+  );
+  let data = await response.json();
+  return data;
+};
+getNewTodo(2).then((data) => {
+  console.log("get data >> ", data);
+});
+
+// fetch API example
+// fetch("https://jsonplaceholder.typicode.com/todos/1")
+//   .then((Response) => {
+//     return Response.json();
+//   })
+//   .then((data) => {
+//     console.log("check fetch data >> ", data);
+//   });
 
 // Callbacck Hell example
 // getTodos(1, (error, data) => {
