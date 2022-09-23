@@ -129,23 +129,28 @@ var callback = function callback(error, data) {
 };
 
 function getTodos(id, callback) {
-  var request = new XMLHttpRequest();
+  return new Promise(function (resolve, reject) {
+    var request = new XMLHttpRequest();
 
-  request.onreadystatechange = function () {
-    if (this.readyState === 4 && this.status === 200) {
-      var data = JSON.parse(request.responseText); // const dataString = JSON.stringify(data);
+    request.onreadystatechange = function () {
+      if (this.readyState === 4 && this.status === 200) {
+        var data = JSON.parse(request.responseText); // const dataString = JSON.stringify(data);
+        // callback(undefined, data);
+        // callback(undefined, dataString);
 
-      callback(undefined, data); // callback(undefined, dataString);
-    }
+        resolve(data);
+      }
 
-    if (this.readyState === 4 && this.status !== 200) {
-      callback("Somethings wrongs", undefined);
-    }
-  };
+      if (this.readyState === 4 && this.status !== 200) {
+        // callback("Somethings wrongs", undefined);
+        reject("Error");
+      }
+    };
 
-  request.open("GET", "https://jsonplaceholder.typicode.com/todos/".concat(id), true); // request.open("GET", "src/data.json", true);
+    request.open("GET", "https://jsonplaceholder.typicode.com/todos/".concat(id), true); // request.open("GET", "src/data.json", true);
 
-  request.send();
+    request.send();
+  });
 } // Callbacck Hell example
 // getTodos(1, (error, data) => {
 //   if (error) {
@@ -172,8 +177,16 @@ function getTodos(id, callback) {
 //   }
 // });
 // getTodos(1, callback);
-// promise example
 
+
+getTodos(1).then(function (data) {
+  console.log("OK1 >> ", data);
+  getTodos(2).then(function (data) {
+    console.log("OK2 >> ", data);
+  });
+}).catch(function (error) {
+  console.log(">> ", error);
+}); // promise example
 
 var promiseExp = function promiseExp() {
   // Cach 1
@@ -185,11 +198,12 @@ var promiseExp = function promiseExp() {
     });
   }); // Cach 2
   // return new Promise(function(resolve, reject) {});
-};
-
-promiseExp().then(function (data) {
-  console.log(data);
-});
+}; // promiseExp()
+//   .then((data) => {
+//     console.log(data);
+//   }).then((error) => {
+//     console.log("Error");
+//   });
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -218,7 +232,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37523" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43985" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -8,24 +8,31 @@ const callback = (error, data) => {
 };
 
 function getTodos(id, callback) {
-  var request = new XMLHttpRequest();
+  return new Promise((resolve, reject) => {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+      if (this.readyState === 4 && this.status === 200) {
+        const data = JSON.parse(request.responseText);
+        // const dataString = JSON.stringify(data);
+        // callback(undefined, data);
+        // callback(undefined, dataString);
+        resolve(data);
+      }
 
-  request.onreadystatechange = function () {
-    if (this.readyState === 4 && this.status === 200) {
-      const data = JSON.parse(request.responseText);
-      // const dataString = JSON.stringify(data);
-      callback(undefined, data);
-      // callback(undefined, dataString);
-    }
+      if (this.readyState === 4 && this.status !== 200) {
+        // callback("Somethings wrongs", undefined);
+        reject("Error");
+      }
+    };
 
-    if (this.readyState === 4 && this.status !== 200) {
-      callback("Somethings wrongs", undefined);
-    }
-  };
-
-  request.open("GET", `https://jsonplaceholder.typicode.com/todos/${id}`, true);
-  // request.open("GET", "src/data.json", true);
-  request.send();
+    request.open(
+      "GET",
+      `https://jsonplaceholder.typicode.com/todos/${id}`,
+      true
+    );
+    // request.open("GET", "src/data.json", true);
+    request.send();
+  });
 }
 
 // Callbacck Hell example
@@ -55,6 +62,17 @@ function getTodos(id, callback) {
 // });
 
 // getTodos(1, callback);
+getTodos(1)
+  .then((data) => {
+    console.log("OK1 >> ", data);
+
+    getTodos(2).then((data) => {
+      console.log("OK2 >> ", data);
+    });
+  })
+  .catch((error) => {
+    console.log(">> ", error);
+  });
 
 // promise example
 const promiseExp = () => {
@@ -67,6 +85,9 @@ const promiseExp = () => {
   // Cach 2
   // return new Promise(function(resolve, reject) {});
 };
-promiseExp().then((data) => {
-  console.log(data);
-});
+// promiseExp()
+//   .then((data) => {
+//     console.log(data);
+//   }).then((error) => {
+//     console.log("Error");
+//   });
