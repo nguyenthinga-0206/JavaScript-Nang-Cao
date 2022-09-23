@@ -143,7 +143,7 @@ function getTodos(id, callback) {
 
       if (this.readyState === 4 && this.status !== 200) {
         // callback("Somethings wrongs", undefined);
-        reject("Error");
+        reject("Error id " + id);
       }
     };
 
@@ -177,28 +177,40 @@ function getTodos(id, callback) {
 //   }
 // });
 // getTodos(1, callback);
+// Promise example
+// getTodos(1)
+//   .then((data) => {
+//     console.log("OK1 >> ", data);
+//     getTodos(2).then((data) => {
+//       console.log("OK2 >> ", data);
+//     });
+//   })
+//   .catch((error) => {
+//     console.log(">> ", error);
+//   });
 
 
-getTodos(1).then(function (data) {
-  console.log("OK1 >> ", data);
-  getTodos(2).then(function (data) {
-    console.log("OK2 >> ", data);
-  });
+getTodos(1).then(function (data1) {
+  console.log("OK1 >> ", data1);
+  return getTodos(2); // return getTodos("2jasj");
+}).then(function (data2) {
+  console.log("OK2 >> ", data2);
+  return getTodos(3);
+}).then(function (data3) {
+  console.log("OK3 >> ", data3);
 }).catch(function (error) {
   console.log(">> ", error);
 }); // promise example
-
-var promiseExp = function promiseExp() {
-  // Cach 1
-  return new Promise(function (resolve, reject) {
-    // resolve("get some data");
-    resolve({
-      name: "Nga",
-      channel: "erict"
-    });
-  }); // Cach 2
-  // return new Promise(function(resolve, reject) {});
-}; // promiseExp()
+// const promiseExp = () => {
+//   // Cach 1
+//   return new Promise((resolve, reject) => {
+//     // resolve("get some data");
+//     resolve({ name: "Nga", channel: "erict" });
+//   });
+//   // Cach 2
+//   // return new Promise(function(resolve, reject) {});
+// };
+// promiseExp()
 //   .then((data) => {
 //     console.log(data);
 //   }).then((error) => {
@@ -232,7 +244,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43985" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35591" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
