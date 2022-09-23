@@ -25,5 +25,6 @@ Created with CodeSandbox
  
  # Throwing Errors
  
- # Toán Tử 3 Dấu Chấm
+ # Toán Tử 3 Dấu Chấm - Destructuring Assignment
+ - Toán Tử 3 Dấu Chấm tượng trưng cho việc copy.
  

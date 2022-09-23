@@ -1,3 +1,30 @@
+//...copy
+let arr1 = [1, 2, 3, 4, 5];
+let state = {
+  name: "Nga",
+  address: "Thanh Hoa",
+  channel: "Eric",
+};
+// console.log("get data arr1 >> ", arr1);
+
+// let arr2 = [0,...arr1, 6] // copy lai arr1 bo vao
+// let arr2 = { ...state, channel: "erict" };
+// console.log("get data arr1 >> ", arr2);
+
+// Cach 1
+// let name = state.name;
+// let address = state.address;
+// let channel = state.channel;
+
+// Cach 2
+// let { name1, address, channel } = state; // phai trung ten voi key cua object
+// console.log("check key >> ", name1, address, channel);
+
+let arr = ["Nga", "Eric"];
+let [name, channel] = arr;
+console.log("check key >> ", name, channel);
+
+// callback
 const callback = (error, data) => {
   if (error) {
     console.log("Error >> ", error);
@@ -68,13 +95,13 @@ const getNewTodo = async (id) => {
   }
 };
 
-getNewTodo("gfasa")
-  .then((data) => {
-    console.log("check get data >> ", data);
-  })
-  .catch((error) => {
-    console.log("check error >> ", error.message);
-  });
+// getNewTodo("gfasa")
+//   .then((data) => {
+//     console.log("check get data >> ", data);
+//   })
+//   .catch((error) => {
+//     console.log("check error >> ", error.message);
+//   });
 
 // fetch API example
 // fetch("https://jsonplaceholder.typicode.com/todos/1")
