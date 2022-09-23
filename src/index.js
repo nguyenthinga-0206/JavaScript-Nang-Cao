@@ -35,6 +35,14 @@ function getTodos(id, callback) {
   });
 }
 
+fetch("https://jsonplaceholder.typicode.com/todos/1")
+  .then((Response) => {
+    return Response.json();
+  })
+  .then((data) => {
+    console.log("check fetch data >> ", data);
+  });
+
 // Callbacck Hell example
 // getTodos(1, (error, data) => {
 //   if (error) {
@@ -76,22 +84,22 @@ function getTodos(id, callback) {
 //     console.log(">> ", error);
 //   });
 
-getTodos(1)
-  .then((data1) => {
-    console.log("OK1 >> ", data1);
-    return getTodos(2);
-    // return getTodos("2jasj");
-  })
-  .then((data2) => {
-    console.log("OK2 >> ", data2);
-    return getTodos(3);
-  })
-  .then((data3) => {
-    console.log("OK3 >> ", data3);
-  })
-  .catch((error) => {
-    console.log(">> ", error);
-  });
+// getTodos(1)
+//   .then((data1) => {
+//     console.log("OK1 >> ", data1);
+//     return getTodos(2);
+//     // return getTodos("2jasj");
+//   })
+//   .then((data2) => {
+//     console.log("OK2 >> ", data2);
+//     return getTodos(3);
+//   })
+//   .then((data3) => {
+//     console.log("OK3 >> ", data3);
+//   })
+//   .catch((error) => {
+//     console.log(">> ", error);
+//   });
 
 // promise example
 // const promiseExp = () => {
