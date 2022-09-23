@@ -21,7 +21,7 @@ function getTodos(id, callback) {
 
       if (this.readyState === 4 && this.status !== 200) {
         // callback("Somethings wrongs", undefined);
-        reject("Error");
+        reject("Error id " + id);
       }
     };
 
@@ -62,29 +62,48 @@ function getTodos(id, callback) {
 // });
 
 // getTodos(1, callback);
-getTodos(1)
-  .then((data) => {
-    console.log("OK1 >> ", data);
 
-    getTodos(2).then((data) => {
-      console.log("OK2 >> ", data);
-    });
+// Promise example
+// getTodos(1)
+//   .then((data) => {
+//     console.log("OK1 >> ", data);
+
+//     getTodos(2).then((data) => {
+//       console.log("OK2 >> ", data);
+//     });
+//   })
+//   .catch((error) => {
+//     console.log(">> ", error);
+//   });
+
+getTodos(1)
+  .then((data1) => {
+    console.log("OK1 >> ", data1);
+    return getTodos(2);
+    // return getTodos("2jasj");
+  })
+  .then((data2) => {
+    console.log("OK2 >> ", data2);
+    return getTodos(3);
+  })
+  .then((data3) => {
+    console.log("OK3 >> ", data3);
   })
   .catch((error) => {
     console.log(">> ", error);
   });
 
 // promise example
-const promiseExp = () => {
-  // Cach 1
-  return new Promise((resolve, reject) => {
-    // resolve("get some data");
-    resolve({ name: "Nga", channel: "erict" });
-  });
+// const promiseExp = () => {
+//   // Cach 1
+//   return new Promise((resolve, reject) => {
+//     // resolve("get some data");
+//     resolve({ name: "Nga", channel: "erict" });
+//   });
 
-  // Cach 2
-  // return new Promise(function(resolve, reject) {});
-};
+//   // Cach 2
+//   // return new Promise(function(resolve, reject) {});
+// };
 // promiseExp()
 //   .then((data) => {
 //     console.log(data);
