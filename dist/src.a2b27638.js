@@ -160,6 +160,17 @@ function getTodos(id, callback) {
     request.send();
   });
 } // Async & Await example
+// const getNewTodo = async (id) => {
+//   let response = await fetch(
+//     `https://jsonplaceholder.typicode.com/todos/${id}`
+//   );
+//   if (response && response.status !== 200) {
+//     throw new Error("Somethong wrongs with status code " + response.status);
+//     // reject
+//   }
+//   let data = await response.json();
+//   return data; //resolve
+// };
 
 
 var getNewTodo = /*#__PURE__*/function () {
@@ -169,24 +180,39 @@ var getNewTodo = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
+            _context.prev = 0;
+            _context.next = 3;
             return fetch("https://jsonplaceholder.typicode.com/todos/".concat(id));
 
-          case 2:
+          case 3:
             response = _context.sent;
-            _context.next = 5;
+
+            if (!(response && response.status !== 200)) {
+              _context.next = 6;
+              break;
+            }
+
+            throw new Error("Somethong wrongs with status code " + response.status);
+
+          case 6:
+            _context.next = 8;
             return response.json();
 
-          case 5:
+          case 8:
             data = _context.sent;
             return _context.abrupt("return", data);
 
-          case 7:
+          case 12:
+            _context.prev = 12;
+            _context.t0 = _context["catch"](0);
+            console.log("check catch >> ", _context.t0.message);
+
+          case 15:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee);
+    }, _callee, null, [[0, 12]]);
   }));
 
   return function getNewTodo(_x) {
@@ -194,8 +220,10 @@ var getNewTodo = /*#__PURE__*/function () {
   };
 }();
 
-getNewTodo(2).then(function (data) {
-  console.log("get data >> ", data);
+getNewTodo("gfasa").then(function (data) {
+  console.log("check get data >> ", data);
+}).catch(function (error) {
+  console.log("check error >> ", error.message);
 }); // fetch API example
 // fetch("https://jsonplaceholder.typicode.com/todos/1")
 //   .then((Response) => {
@@ -301,7 +329,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38265" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35299" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
